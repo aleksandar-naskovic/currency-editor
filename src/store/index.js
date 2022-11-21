@@ -12,12 +12,10 @@ export default new Vuex.Store({
     openDrawer: (state, drawer) => state.drawer = drawer,
     closeDrawer: (state, drawer) => state.drawer = drawer,
     addCurrency: (state, currency) => {
-      console.log(currency)
       state.currencies.push({...currency})
       state.drawer = false
     },
     editCurrency: (state, currency) => {
-      console.log(currency)
         Vue.set(state.currencies, currency.index, {...currency});
         state.drawer = false
     },
@@ -28,7 +26,6 @@ export default new Vuex.Store({
   },
   actions: {
     openDrawer(context) {
-      console.log(context)
       context.commit('openDrawer', true)
     },
     closeDrawer(context) {

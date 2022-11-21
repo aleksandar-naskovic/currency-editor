@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id="app">
     <v-main>
       <router-view/>
     </v-main>
@@ -16,3 +16,16 @@ export default {
   }),
 };
 </script>
+
+<style>
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+
+#app {
+    font-family: 'Open Sans',serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+}
+
+</style>

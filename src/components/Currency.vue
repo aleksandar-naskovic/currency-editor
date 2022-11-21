@@ -2,7 +2,7 @@
     <div>
         <v-layout align-center justify-space-between mb-6>
             <h2>Currencies</h2>
-            <v-btn color="primary" style=" text-transform:none" :disabled="drawer" @click="addCurrency"><v-icon>fas fa-plus</v-icon> Add Currency</v-btn>
+            <v-btn color="primary" style=" text-transform:none" :disabled="drawer" @click="addCurrency"><v-icon class="mr-2">fas fa-plus</v-icon>Add Currency</v-btn>
         </v-layout>
         <template>
             <v-card>

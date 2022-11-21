@@ -92,9 +92,7 @@ export default {
       },
         selectedCurrency: {
             handler: function () {
-                console.log(this.selectedCurrency)
                 if (Object.keys(this.selectedCurrency).length > 0)   {
-                console.log(this.selectedCurrency)
                     this.currency = {...this.selectedCurrency}
                 }
             },
@@ -122,8 +120,6 @@ export default {
                 Vue.set(this.msg, 'symbol', 'Currency symbol is required');
                 return
             }
-            console.log(currency)
-            console.log(this.currency)
             if (!this.editMode)
                 this.addCurrency(this.currency);
             else {
