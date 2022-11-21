@@ -25,12 +25,12 @@
                     disable-sort
                 >
                     <template v-slot:item="row">
-                        <tr @click="selectCurrency(row.item, row.index)">
+                        <tr @click="selectCurrency(row.item)">
                             <td>{{row.item.name}}</td>
                             <td>{{row.item.code}}</td>
                             <td>{{row.item.symbol}}</td>
                             <td>
-                                <v-btn @click.stop="deleteCurrency(row.index)" icon>
+                                <v-btn @click.stop="deleteCurrency(row.item.id)" icon>
                                     <v-icon>fa-trash-can</v-icon>
                                 </v-btn>
                             </td>
@@ -68,9 +68,8 @@ export default {
         }
     },
     methods: {
-        selectCurrency(currency, index) {
+        selectCurrency(currency) {
             this.editMode = true;
-            currency.index = index
             this.selectedCurrency = currency;
             this.openDrawer()
         },

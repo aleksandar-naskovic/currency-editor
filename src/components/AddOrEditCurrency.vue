@@ -65,6 +65,7 @@ export default {
     data () {
         return {
             currency: {
+                id: '',
                 name: '',
                 code: '',
                 symbol: ''
@@ -83,8 +84,8 @@ export default {
     },
     watch: {
       drawer(newVal) {
-          console.log(newVal)
           if (newVal && !this.editMode) {
+              this.currency.id = '';
               this.currency.name = '';
               this.currency.code = '';
               this.currency.symbol = '';
@@ -101,30 +102,49 @@ export default {
     },
     computed: {
         ...mapGetters(["drawer"]),
+        ...mapGetters(["currencies"]),
+
     },
     methods: {
         ...mapActions(["closeDrawer"]),
         ...mapActions(["addCurrency"]),
         ...mapActions(["editCurrency"]),
         submitForm(currency) {
+            if (this.validations())
+                {
+                    if (!this.editMode) {
+                        this.currency.id = this.currencies.length;
+                        this.addCurrency(this.currency);
+                    } else {
+                        this.editCurrency(currency)
+                    }
+                }
+        },
+        checkIfCodeIsUnique(newCurrency) {
+            let currencies = [...this.currencies];
+            if (this.editMode)
+                currencies = currencies.filter(currency => currency.id !== newCurrency.id)
+            return currencies.some(currency => currency.code === newCurrency.code)
+        },
+        validations() {
             this.msg = {}
             if (!this.currency.name) {
                 Vue.set(this.msg, 'name', 'Currency name is required');
-                return
+                return false
             }
-            if (!this.currency.code) {
-                Vue.set(this.msg, 'code', 'Currency code is required');
-                return
+            if (this.currency.code.length !== 3) {
+                Vue.set(this.msg, 'code', 'Currency must have 3 characters of length,');
+                return false
             }
             if (!this.currency.symbol) {
                 Vue.set(this.msg, 'symbol', 'Currency symbol is required');
-                return
+                return false
             }
-            if (!this.editMode)
-                this.addCurrency(this.currency);
-            else {
-                this.editCurrency(currency)
+            if (this.checkIfCodeIsUnique(this.currency)){
+                Vue.set(this.msg, 'code', 'Currency code is not unique');
+                return false
             }
+            return true
         }
     }
 }

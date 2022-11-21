@@ -16,7 +16,7 @@ export default new Vuex.Store({
       state.drawer = false
     },
     editCurrency: (state, currency) => {
-        Vue.set(state.currencies, currency.index, {...currency});
+        Vue.set(state.currencies, currency.id, {...currency});
         state.drawer = false
     },
     deleteCurrency: (state, index) => {
